@@ -9,6 +9,7 @@ var Contender = function(named, promCent, warExp, isBadass, isAlcoholic, isGeniu
 	this.img = img;
 	this.chance = 50;
 	this.adv = 0;
+  this.enabled = true;
 	this.bonusList = [];
 	contenderList.push(this);
 
@@ -71,7 +72,7 @@ imgs[12].src = 'images/washington.jpg';
 function getContenderList() {
 	var arc = new Contender("Joan of Arc", 13, 2, true, false, false, false, imgs[0]);
 	var beethoven = new Contender("Ludwig Beethoven", 15, 0, false, false, true, false, imgs[1]);
-	var curie = new Contender("Marie Curie", 20, 0, false, false, true, true, imgs[2]);
+	// var curie = new Contender("Marie Curie", 20, 0, false, false, true, true, imgs[2]);
 	var einstein = new Contender("Albert Einstein", 20, 0, false, false, true, true, imgs[3]);
 	var franklin = new Contender("Benjamin Franklin", 18, 1, false, false, true, false, imgs[4]);
 	var tesla = new Contender("Nikola Tesla", 19, 0, false, true, true, false, imgs[8]);
@@ -87,19 +88,25 @@ function getAllBonus() {
 }
 
 function randomizer() {
-	return Math.floor(Math.random() * contenderList.length);
+  return Math.floor(Math.random() * contenderList.length);
 }
 
 function pickContenders() {
 
-	p1Choice = contenderList[randomizer()];
-	console.log(p1Choice);
-	do {
-		p2Choice = contenderList[randomizer()];
-	}
-	while (p1Choice === p2Choice);
-	console.log(p2Choice);
+  var randomNum1 = randomizer();
+  var randomNum2 = randomizer();
+
+  if (randomNum1 === randomNum2) {
+    randomNum2 = randomizer();
+  } else {
+    console.log('randoms passed');
+  }
+  p1Choice = contenderList[randomNum1];
+  p2Choice = contenderList[randomNum2];
+
 }
+
+
 
 function fight(contA, contB) {
 	var chanceMultiplier = 1.75;
@@ -215,14 +222,13 @@ function sendTracker() {
 	bettingData[0].value = userWinningBets;
 	bettingData[1].value = userLosingBets;
 
-  var chartContain = document.getElementById('chart-container');
-  chartContain.width = 100;
-  chartContain.height = 100;
   var ctx = document.getElementById('main-tracker').getContext('2d');
-  ctx.canvas.width = 100;
-  ctx.canvas.height = 100;
+
   var bettingChart = new Chart(ctx).Pie(bettingData, {
-      showScale: false
+      responsive: true,
+      animationEasing: 'easeInOutQuad',
+      animationSteps: 50,
+      segmentShowStroke: false
   });
 
 }
@@ -230,8 +236,8 @@ function sendTracker() {
 
 
 //++++++++++++++++++++++++++++++++++ GLOBAL VARIABLES 'n FUNCTIONS
-var userWinningBets = 1;
-var userLosingBets = 1;
+var userWinningBets = 0;
+var userLosingBets = 0;
 
 var bettingData = [
 	{
@@ -248,6 +254,7 @@ var bettingData = [
 	}
 ];
 
+var rando;
 var contenderList = new Array();
 getContenderList();
 getAllBonus();
