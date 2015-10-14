@@ -10,6 +10,7 @@ var Contender = function(named, promCent, warExp, isBadass, isAlcoholic, isGeniu
 	this.chance = 50;
 	this.adv = 0;
 	this.bonusList = [];
+	contenderList.push(this);
 
 	this.getAdv = function(){
 		if (this.isBadass === true) {
@@ -76,7 +77,7 @@ function getContenderList() {
 	var tesla = new Contender("Nikola Tesla", 19, 0, false, true, true, false, imgs[8]);
 	var twain = new Contender("Mark Twain", 19, 1, true, true, false, false, imgs[10]);
 
-	contenderList.push(arc, beethoven, curie, einstein, franklin, tesla, twain);
+	// contenderList.push(arc, beethoven, curie, einstein, franklin, tesla, twain);
 }
 
 function getAllBonus() {
@@ -90,6 +91,7 @@ function randomizer() {
 }
 
 function pickContenders() {
+
 	p1Choice = contenderList[randomizer()];
 	console.log(p1Choice);
 	do {
@@ -141,7 +143,7 @@ function placePics(contA, contB) {
 	if (p1Pic.firstChild) {
 		p1Pic.removeChild(p1Pic.firstChild);
 		p2Pic.removeChild(p2Pic.firstChild);
-	} 
+	}
 
 	p1Pic.appendChild(contA.img);
 	p2Pic.appendChild(contB.img);
@@ -173,7 +175,7 @@ function placeBonus(contA, contB) {
 		var itemB = document.createElement('li');
 		itemB.appendChild(document.createTextNode(contB.bonusList[j]));
 		p2List.appendChild(itemB);
-	}	
+	}
 }
 
 function removeWinner() {
@@ -182,6 +184,8 @@ function removeWinner() {
 	elWinner.textContent = '';
 	elWinExtra.textContent = '';
 }
+
+
 
 var p1tracker = function() {
 	var elWinner = document.getElementById('winnerbox');
@@ -202,17 +206,48 @@ var p2tracker = function() {
 	}
 	console.log("You chose " + p2Choice.named);
 };
-var sendTracker = function() {
+function sendTracker() {
 	var elWinTracker = document.getElementById('win-tracker');
 	var elLoseTracker = document.getElementById('lose-tracker');
 	elWinTracker.textContent = 'Winning bets: ' + userWinningBets;
 	elLoseTracker.textContent = 'Losing bets: ' + userLosingBets;
-};
+
+	bettingData[0].value = userWinningBets;
+	bettingData[1].value = userLosingBets;
+
+  var chartContain = document.getElementById('chart-container');
+  chartContain.width = 100;
+  chartContain.height = 100;
+  var ctx = document.getElementById('main-tracker').getContext('2d');
+  ctx.canvas.width = 100;
+  ctx.canvas.height = 100;
+  var bettingChart = new Chart(ctx).Pie(bettingData, {
+      showScale: false
+  });
+
+}
+
+
 
 //++++++++++++++++++++++++++++++++++ GLOBAL VARIABLES 'n FUNCTIONS
+var userWinningBets = 1;
+var userLosingBets = 1;
 
-var userWinningBets = 0;
-var userLosingBets = 0;
+var bettingData = [
+	{
+		value: userWinningBets,
+		label: 'Winning Bets',
+		color: '#F4EDBB',
+    highlight: '#f7f7f7'
+	},
+	{
+		value: userLosingBets,
+		label: 'Losing Bets',
+		color: '#DD2719',
+    highlight: 'lightcoral'
+	}
+];
+
 var contenderList = new Array();
 getContenderList();
 getAllBonus();
@@ -245,7 +280,7 @@ p2.addEventListener('click', function() {
 	p2tracker();
 	sendTracker();
 	console.log("Running winning bets: " + userWinningBets);
-	console.log("Running losing bets: " + userLosingBets);	
+	console.log("Running losing bets: " + userLosingBets);
 });
 
 

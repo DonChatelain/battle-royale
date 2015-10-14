@@ -62,6 +62,19 @@ aside p {
 	line-height: 0px;
 	text-align: right;
 }
+#chart-container {
+  max-height: 100px;
+  max-width: 100px;
+
+}
+#main-tracker {
+  border: 1px dashed green;
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+  /*padding: 5px;*/
+
+}
 footer {
 	height: 100px;
 }
