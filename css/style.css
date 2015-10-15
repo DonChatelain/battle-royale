@@ -8,14 +8,17 @@ body {
 h1 {
   color: crimson;
 	text-align: center;
+  font-family: 'Metal Mania';
 }
 
 ul {
   margin-top: 30px;
 	list-style: none;
+  font-size: 20px;
 }
 main {
 	/*border: 1px dashed blue;*/
+    font-family: 'de-walpergens-pica';
 }
 #left-container, #center-container, #right-container {
 	/*border: 1px dashed green;*/
@@ -31,35 +34,55 @@ main {
 	margin-right: 10px;
 }
 #left-bonus {
-	margin-left: 15%;
+	margin-left: 5%;
 }
 #right-bonus {
-	margin-right: 15%;
+	margin-right: 5%;
 	text-align: right;
 }
 #center-container h2{
+  font-family: 'Metal Mania';
+  font-size: 80px;
+  font-weight: ;
   color: crimson;
 	text-align: center;
 	margin-top: 200px;
 }
 button {
+  font-family: 'de-walpergens-pica';
+  text-align: left;
+  font-size: 20px;
+  text-indent: -15px;
+  text-transform: -20px -20px;
+  line-height: -25px;
   background-color: darkred;
   color: #fff;
-	margin-top: 100px;
+	margin-top: 80px;
 	border-bottom: 4px solid #4A0101;
 }
 button:active {
 	border-bottom: 1px solid #4A0101;
 }
 #results {
+
+  font-family: 'de-walpergens-pica';
   color: crimson;
 	/*border: 1px dashed red;*/
-	margin-top: 10px;
+	margin-top: 20px;
 	height: 150px;
 	text-align: center;
 }
+#results h2, h3, h4 {
+  margin-bottom: 0px;
+}
 #winner-extra {
 
+}
+.right-choice {
+  color: olivedrab;
+}
+.wrong-choice {
+  color: orange;
 }
 #right-pic img {
 	-webkit-transform: scaleX(-1);

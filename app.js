@@ -40,7 +40,6 @@ var Contender = function(named, promCent, warExp, isBadass, isAlcoholic, isGeniu
 	};
 };
 
-
 var imgs = new Array();
 imgs[0] = new Image();
 imgs[0].src = 'images/arc.jpg';
@@ -70,26 +69,10 @@ imgs[12] = new Image();
 imgs[12].src = 'images/washington.jpg';
 imgs[13] = new Image();
 imgs[13].src = 'images/darwin.jpg';
-
-function getContenderLists() {
-	var arc = new Contender("Joan of Arc", 13, 2, true, false, false, false, imgs[0]);
-	var beethoven = new Contender("Ludwig Beethoven", 15, 0, false, false, true, false, imgs[1]);
-  var curie = new Contender("Marie Curie", 20, 0, false, false, true, true, imgs[2]);
-	var einstein = new Contender("Albert Einstein", 20, 0, false, false, true, true, imgs[3]);
-	var franklin = new Contender("Benjamin Franklin", 18, 1, false, false, true, false, imgs[4]);
-  var gandhi = new Contender("Mahatma Gandhi", 20, 0, false, false, false, true, imgs[5]);
-  var salk = new Contender("Jonas Salk", 20, 0, false, false, true, true, imgs[6]);
-  var teresa = new Contender("Mother Teresa", 20, 0, false, false, false, true, imgs[7]);
-	var tesla = new Contender("Nikola Tesla", 19, 0, false, true, true, false, imgs[8]);
-  var tubman = new Contender("Harriet Tubman", 19, 0, true, false, false, true, imgs[9]);
-	var twain = new Contender("Mark Twain", 19, 1, true, true, false, false, imgs[10]);
-  var vinci = new Contender("Leo da Vinci", 15, 0, false, false, true, false, imgs[11]);
-  var washington = new Contender("George Washington", 18, 2, true, false, false, false, imgs[12]);
-  var darwin = new Contender("Charles Darwin", 19, 0, false, false, true, false, imgs[13]);
-
-	 contenderList1.push(arc, curie, franklin, salk, tesla, twain, washington);
-   contenderList2.push(beethoven, einstein, gandhi, teresa, tubman, vinci, darwin);
-}
+imgs[14] = new Image();
+imgs[14].src = 'images/question-left.jpg';
+imgs[15] = new Image();
+imgs[15].src = 'images/question-right.jpg';
 
 var murders = [
   "eviscerated",
@@ -115,33 +98,49 @@ var murders = [
   "fried",
   "strangled",
   "dropped a piano on",
-  "buried"
+  "buried",
+  "crucified",
+  "disemboweled",
+  "squashed",
+  "swatted"
 ];
+
+function getContenderLists() {
+	var arc = new Contender("Joan of Arc", 13, 2, true, false, false, false, imgs[0]);
+	var beethoven = new Contender("Ludwig Beethoven", 15, 0, false, false, true, false, imgs[1]);
+  var curie = new Contender("Marie Curie", 20, 0, false, false, true, true, imgs[2]);
+	var einstein = new Contender("Albert Einstein", 20, 0, false, false, true, true, imgs[3]);
+	var franklin = new Contender("Benjamin Franklin", 18, 1, false, false, true, false, imgs[4]);
+  var gandhi = new Contender("Mahatma Gandhi", 20, 0, false, false, false, true, imgs[5]);
+  var salk = new Contender("Jonas Salk", 20, 0, false, false, true, true, imgs[6]);
+  var teresa = new Contender("Mother Teresa", 20, 0, false, false, false, true, imgs[7]);
+	var tesla = new Contender("Nikola Tesla", 19, 0, false, true, true, false, imgs[8]);
+  var tubman = new Contender("Harriet Tubman", 19, 0, true, false, false, true, imgs[9]);
+	var twain = new Contender("Mark Twain", 19, 1, true, true, false, false, imgs[10]);
+  var vinci = new Contender("Leo da Vinci", 15, 0, false, false, true, false, imgs[11]);
+  var washington = new Contender("George Washington", 18, 2, true, false, false, false, imgs[12]);
+  var darwin = new Contender("Charles Darwin", 19, 0, false, false, true, false, imgs[13]);
+
+	 contenderList1.push(arc, curie, franklin, salk, tesla, twain, washington);
+   contenderList2.push(beethoven, einstein, gandhi, teresa, tubman, vinci, darwin);
+}
 
 function murdersRandomizer() {
   return Math.floor(Math.random() * murders.length);
 }
 function chooseMurder() {
   var rando = murdersRandomizer();
-  realMurder = murders[rando];
-}
-
-function getAllBonus() {
-	for (var i = 0; i < contenderListAll.length; i++) {
-		contenderListAll[i].getAdv();
-	}
+  realMurder = murders[rando].toUpperCase();
 }
 
 function contenderRandomizer() {
   return Math.floor(Math.random() * contenderList1.length);
 }
-
-
 function pickContenders() {
   var elWinExtra = document.getElementById('winner-extra');
   if (contenderList1.length == 0) {
     //notWORKING??
-    elWinExtra.innerHTML = "<p>END</p>";
+    elWinExtra.textContent = "END";
     console.log("stoppedPickContenders");
     return (null);
   } else {
@@ -163,52 +162,13 @@ function pickContenders() {
   }
 }
 
-function fight(contA, contB) {
-  // if (contenderList1.length == 0) {
-  //   console.log("stoppedFighting");
-  //   return (null);
-  // } else {
-  	var chanceMultiplier = 1.75;
-
-  	// console.log(contA.named + "'s advantage is " + contA.adv);
-  	// console.log(contB.named + "'s advantage is " + contB.adv);
-
-  	if (contA.adv >= contB.adv) {
-  		var diff = contA.adv - contB.adv;
-  		contA.chance += diff * chanceMultiplier;
-  	} else {
-  		var diff = contB.adv - contA.adv;
-  		contA.chance -= diff * chanceMultiplier;
-  	}
-  	// console.log("Difference is " + diff);
-  	// console.log(contA.named + "'s chance is " + contA.chance);
-
-
-  	var fate = Math.floor(Math.random() * 100);
-  	// console.log("Fate has chosen " + fate);
-
-  	var elWinner = document.getElementById('winnerbox');
-  	var elWinExtra = document.getElementById('winner-extra');
-
-    chooseMurder();
-
-  	if (fate <= contA.chance) {
-  		// console.log(contA.named + " is the winner!");
-  		elWinner.textContent = (contA.named);
-  		elWinExtra.textContent = realMurder + " " + contB.named;
-  	} else {
-  		// console.log(contB.named + " is the winner!");
-  		elWinner.textContent = (contB.named);
-  		elWinExtra.textContent = realMurder + " " + contA.named;
-  	}
-  // }
+function tempPics() {
+    var p1Pic = document.getElementById('left-pic');
+    var p2Pic = document.getElementById('right-pic');
+    p1Pic.appendChild(imgs[14]);
+    p2Pic.appendChild(imgs[15]);
 }
-
 function placePics(contA, contB) {
-  // if (contenderList1.length == 0) {
-  //   console.log("stoppedPlacePix");
-  //   return (null);
-  // } else {
   	var p1Pic = document.getElementById('left-pic');
   	var p2Pic = document.getElementById('right-pic');
   	var p1Name = document.getElementById('left-nametag');
@@ -218,19 +178,18 @@ function placePics(contA, contB) {
   		p1Pic.removeChild(p1Pic.firstChild);
   		p2Pic.removeChild(p2Pic.firstChild);
   	}
-
   	p1Pic.appendChild(contA.img);
   	p2Pic.appendChild(contB.img);
   	p1Name.textContent = contA.named;
   	p2Name.textContent = contB.named;
-  // }
 }
 
+function getAllBonus() {
+  for (var i = 0; i < contenderListAll.length; i++) {
+    contenderListAll[i].getAdv();
+  }
+}
 function placeBonus(contA, contB) {
-  // if (contenderList1.length == 0) {
-  //   console.log("stoppedBonus");
-  //   return (null);
-  // } else {
   	var p1List = document.getElementById('left-bonus');
   	var p2List = document.getElementById('right-bonus');
 
@@ -252,48 +211,74 @@ function placeBonus(contA, contB) {
   		itemB.appendChild(document.createTextNode(contB.bonusList[j]));
   		p2List.appendChild(itemB);
   	}
-  // }
 }
 
 function removeWinner() {
-  // if (contenderList1.length == 0) {
-  //   console.log("stoppedRemoveWinner");
-  //   return (null);
-  // } else {
   	var elWinner = document.getElementById('winnerbox');
   	var elWinExtra = document.getElementById('winner-extra');
+    var elWinChose = document.getElementById('winner-chose');
   	elWinner.textContent = '';
   	elWinExtra.textContent = '';
-  // }
+    elWinChose.textContent = '';
+}
+
+function fight(contA, contB) {
+    var chanceMultiplier = 1.75;
+
+    if (contA.adv >= contB.adv) {
+      var diff = contA.adv - contB.adv;
+      contA.chance += diff * chanceMultiplier;
+    } else {
+      var diff = contB.adv - contA.adv;
+      contA.chance -= diff * chanceMultiplier;
+    }
+    var fate = Math.floor(Math.random() * 100);
+
+    var elWinner = document.getElementById('winnerbox');
+    var elWinExtra = document.getElementById('winner-extra');
+
+    chooseMurder();
+
+    if (fate <= contA.chance) {
+      elWinner.textContent = (contA.named);
+      elWinExtra.textContent = realMurder + " " + contB.named;
+    } else {
+      elWinner.textContent = (contB.named);
+      elWinExtra.textContent = realMurder + " " + contA.named;
+    }
 }
 
 var p1tracker = function() {
-
   	var elWinner = document.getElementById('winnerbox');
+    var elWinChose = document.getElementById('winner-chose');
+
   	if (p1Choice.named === elWinner.textContent) {
   		userWinningBets += 1;
+       elWinChose.className = "right-choice";
+      elWinChose.textContent = "You Chose Right!";
   	} else if (p2Choice.named === elWinner.textContent) {
   		userLosingBets += 1;
+      elWinChose.className ="wrong-choice";
+      elWinChose.textContent = "You Chose Wrong";
   	}
   	console.log("You chose " + p1Choice.named);
-
 };
-
 var p2tracker = function() {
+    var elWinner = document.getElementById('winnerbox');
+    var elWinChose = document.getElementById('winner-chose');
 
-  	var elWinner = document.getElementById('winnerbox');
   	if (p2Choice.named === elWinner.textContent) {
   		userWinningBets += 1;
+      elWinChose.className = "right-choice";
+      elWinChose.textContent = "You Chose Right!";
   	} else if (p1Choice.named === elWinner.textContent) {
   		userLosingBets += 1;
+      elWinChose.className ="wrong-choice";
+      elWinChose.textContent = "You Chose Wrong";
   	}
   	console.log("You chose " + p2Choice.named);
-
 };
-
-
 function sendTracker() {
-
   	var elWinTracker = document.getElementById('win-tracker');
   	var elLoseTracker = document.getElementById('lose-tracker');
   	elWinTracker.textContent = 'Winning bets: ' + userWinningBets;
@@ -302,54 +287,68 @@ function sendTracker() {
     bettingData[0].value = userWinningBets;
     bettingData[1].value = userLosingBets;
 
-  	// bettingChart.segments[0].value = userWinningBets;
-  	// bettingChart.segments[1].value = userLosingBets;
-
-   //  bettingChart.update();
-
     var ctx = document.getElementById('main-tracker').getContext('2d');
-
     var bettingChart = new Chart(ctx).Pie(bettingData, {
         responsive: true,
         animationEasing: 'easeInOutQuad',
         animationSteps: 50,
         segmentShowStroke: false
     });
-
 }
 
-
+function localize() {
+  var winBetsToStore = JSON.stringify(userWinningBets);
+  var loseBetsToStore = JSON.stringify(userLosingBets);
+  localStorage.setItem("Losing Bets", loseBetsToStore);
+  localStorage.setItem("Winning Bets", winBetsToStore);
+}
+function gettifyLocal() {
+  var retrievedWinsTemp = localStorage.getItem("Winning Bets");
+  var retrievedLosesTemp = localStorage.getItem("Losing Bets");
+  var retrievedWins = JSON.parse(retrievedWinsTemp);
+  var retrievedLoses = JSON.parse(retrievedLosesTemp);
+  if (retrievedWins != null) {
+    userWinningBets = retrievedWins;
+  } else {
+    userWinningBets = 0;
+  }
+  if (retrievedLoses != null) {
+    userLosingBets = retrievedLoses;
+  } else {
+    userLosingBets = 0;
+  }
+}
 
 //++++++++++++++++++++++++++++++++++ GLOBAL VARIABLES 'n FUNCTIONS
-var userWinningBets = 0;
-var userLosingBets = 0;
 
-var bettingData = [
+var userWinningBets = 0; //declares global tracking data
+var userLosingBets = 0;
+var audio = new Audio('fight.mp3'); //tee-hee
+var bettingData = [    //bettingData to populate graph segment values
 	{
-		value: 1,
+		value: userWinningBets,
 		label: 'Winning Bets',
-		color: '#F4EDBB',
-    highlight: '#f7f7f7'
+		color: 'seagreen',
+    highlight: 'olivedrab'
 	},
 	{
-		value: 2,
+		value: userLosingBets,
 		label: 'Losing Bets',
-		color: '#DD2719',
-    highlight: 'crimson'
+		color: 'crimson',
+    highlight: 'orange'
 	}
 ];
-
-var contenderListAll = new Array();
-var contenderList1 = new Array();
-var contenderList2 = new Array();
-var contenderListOut = new Array();
-var realMurder;
-getContenderLists();
-console.log("murder list: " + murders.length);
-getAllBonus();
-var p1Choice;
-var p2Choice;
-sendTracker();
+gettifyLocal();  //Receive previously added local winning/losing bet data
+var contenderListAll = new Array(); //Array for all fighters
+var contenderList1 = new Array();  //Array for fighters on left side
+var contenderList2 = new Array();  //Array for fighters on right side
+var realMurder; //Declares global murder verb variable
+tempPics();  //Places grey questionmark Images as placeholder
+getContenderLists(); //pushes contender objects to respective arrays !important
+getAllBonus(); //pushes each contender's bonuses to their individual bonus arrays
+var p1Choice; //Global left side contender
+var p2Choice; //Global right side contender
+sendTracker(); //Sends initial win/lose bet data to DOM
 var goButton = document.getElementById('button');
 var p1 = document.getElementById('left-container');
 var p2 = document.getElementById('right-container');
@@ -362,25 +361,21 @@ goButton.addEventListener('click', function() {
 	placeBonus(p1Choice, p2Choice);
 	removeWinner();
 });
-
-// while (contenderList1.length > 0) {
   p1.addEventListener('click', function() {
+    // audio.play();
   	fight(p1Choice, p2Choice);
   	p1tracker();
   	sendTracker();
   	console.log("Running winning bets: " + userWinningBets);
   	console.log("Running losing bets: " + userLosingBets);
+    localize();
   });
-// }
-
-// while (contenderList2.length > 0) {
   p2.addEventListener('click', function() {
+    // audio.play();
   	fight(p1Choice, p2Choice);
   	p2tracker();
   	sendTracker();
   	console.log("Running winning bets: " + userWinningBets);
   	console.log("Running losing bets: " + userLosingBets);
+    localize();
   });
-// }
-
-//+++++++++++++++++++++++++++++ JSON Local storage
