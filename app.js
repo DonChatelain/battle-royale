@@ -330,7 +330,7 @@ var bettingData = [
 		value: userLosingBets,
 		label: 'Losing Bets',
 		color: '#DD2719',
-    highlight: 'lightcoral'
+    highlight: 'crimson'
 	}
 ];
 
