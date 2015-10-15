@@ -1,7 +1,17 @@
+html {
+  overflow-x: hidden;
+}
+body {
+  background-color: #1B1B2D;
+  color: #E4E2DA;
+}
 h1 {
+  color: crimson;
 	text-align: center;
 }
+
 ul {
+  margin-top: 30px;
 	list-style: none;
 }
 main {
@@ -28,17 +38,21 @@ main {
 	text-align: right;
 }
 #center-container h2{
+  color: crimson;
 	text-align: center;
 	margin-top: 200px;
 }
 button {
+  background-color: darkred;
+  color: #fff;
 	margin-top: 100px;
-	border-bottom: 4px solid grey;
+	border-bottom: 4px solid #4A0101;
 }
 button:active {
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid #4A0101;
 }
 #results {
+  color: crimson;
 	/*border: 1px dashed red;*/
 	margin-top: 10px;
 	height: 150px;
@@ -54,7 +68,6 @@ aside {
 	left: 0;
 	width: 200px;
 	height: 100px;
-	border: 1px dashed purple;
 	color: grey;
 }
 aside p {
@@ -74,10 +87,12 @@ aside p {
 
 }
 footer {
-	height: 100px;
+  margin-top: 100px;
+  position: ;
+	height: 200px;
 }
 footer p {
-	float: right;
-	margin-right: 100px;
-	margin-top: 45px;
+	text-align: center;
+	margin-right: 115px;
+	margin-top: 85px;
 }
