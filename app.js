@@ -299,8 +299,13 @@ function sendTracker() {
   	elWinTracker.textContent = 'Winning bets: ' + userWinningBets;
   	elLoseTracker.textContent = 'Losing bets: ' + userLosingBets;
 
-  	bettingData[0].value = userWinningBets;
-  	bettingData[1].value = userLosingBets;
+    bettingData[0].value = userWinningBets;
+    bettingData[1].value = userLosingBets;
+
+  	// bettingChart.segments[0].value = userWinningBets;
+  	// bettingChart.segments[1].value = userLosingBets;
+
+   //  bettingChart.update();
 
     var ctx = document.getElementById('main-tracker').getContext('2d');
 
@@ -321,13 +326,13 @@ var userLosingBets = 0;
 
 var bettingData = [
 	{
-		value: userWinningBets,
+		value: 1,
 		label: 'Winning Bets',
 		color: '#F4EDBB',
     highlight: '#f7f7f7'
 	},
 	{
-		value: userLosingBets,
+		value: 2,
 		label: 'Losing Bets',
 		color: '#DD2719',
     highlight: 'crimson'
@@ -378,3 +383,4 @@ goButton.addEventListener('click', function() {
   });
 // }
 
+//+++++++++++++++++++++++++++++ JSON Local storage

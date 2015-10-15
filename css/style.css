@@ -58,6 +58,9 @@ button:active {
 	height: 150px;
 	text-align: center;
 }
+#winner-extra {
+
+}
 #right-pic img {
 	-webkit-transform: scaleX(-1);
 	transform: scaleX(-1);
