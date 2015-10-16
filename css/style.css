@@ -88,18 +88,29 @@ button:active {
 	-webkit-transform: scaleX(-1);
 	transform: scaleX(-1);
 }
+img:hover {
+  -moz-filter: brightness(150%);
+  -webkit-filter: brightness(150%);
+  filter: brightness(150%);
+
+}
 aside {
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	width: 200px;
 	height: 100px;
-	color: grey;
 }
 aside p {
 	margin: 35px 50px 0 0;
 	line-height: 0px;
 	text-align: right;
+}
+#win-tracker{
+  color: seagreen;
+}
+#lose-tracker {
+  color: crimson;
 }
 #chart-container {
   max-height: 100px;
