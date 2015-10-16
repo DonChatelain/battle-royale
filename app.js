@@ -70,9 +70,18 @@ imgs[12].src = 'images/washington.jpg';
 imgs[13] = new Image();
 imgs[13].src = 'images/darwin.jpg';
 imgs[14] = new Image();
-imgs[14].src = 'images/question-left.jpg';
+imgs[14].src = 'images/mlk.jpg';
 imgs[15] = new Image();
-imgs[15].src = 'images/question-right.jpg';
+imgs[15].src = 'images/copernicus.jpg';
+imgs[16] = new Image();
+imgs[16].src = 'images/wright.jpg';
+imgs[17] = new Image();
+imgs[17].src = 'images/lewisclark.jpg';
+
+imgs[18] = new Image();
+imgs[18].src = 'images/question-left.jpg';
+imgs[19] = new Image();
+imgs[19].src = 'images/question-right.jpg';
 
 var murders = [
   "eviscerated",
@@ -124,9 +133,13 @@ function getContenderLists() {
   var vinci = new Contender("Leo da Vinci", 15, 0, false, false, true, false, imgs[11]);
   var washington = new Contender("George Washington", 18, 2, true, false, false, false, imgs[12]);
   var darwin = new Contender("Charles Darwin", 19, 0, false, false, true, false, imgs[13]);
+  var mlk = new Contender("Martin Luther King Jr.", 20, 0, false, false, false, true, imgs[14]);
+  var copernicus = new Contender("Nicolaus Copernicus", 17, 0, false, false, true, false, imgs[15]);
+  var wright = new Contender("Frank Lloyd Wright", 20, 0, false, false, true, false, imgs[16]);
+  var lewisClark = new Contender("Lewis and Clark", 19, 1, true, true, false, false, imgs[17]);
 
-	 contenderList1.push(arc, curie, franklin, salk, tesla, twain, washington);
-   contenderList2.push(beethoven, einstein, gandhi, teresa, tubman, vinci, darwin);
+	 contenderList1.push(arc, curie, franklin, salk, tesla, twain, washington, mlk, wright);
+   contenderList2.push(beethoven, einstein, gandhi, teresa, tubman, vinci, darwin, copernicus, lewisClark);
 }
 
 function murdersRandomizer() {
@@ -144,7 +157,7 @@ function pickContenders() {
   var elWinExtra = document.getElementById('winner-extra');
   if (contenderList1.length == 0) {
     //notWORKING??
-    elWinExtra.textContent = "END";
+    elWinExtra.textContent = "THANKS FOR PLAYING!";
     console.log("stoppedPickContenders");
     return (null);
   } else {
@@ -169,8 +182,8 @@ function pickContenders() {
 function tempPics() {
     var p1Pic = document.getElementById('left-pic');
     var p2Pic = document.getElementById('right-pic');
-    p1Pic.appendChild(imgs[14]);
-    p2Pic.appendChild(imgs[15]);
+    p1Pic.appendChild(imgs[18]);
+    p2Pic.appendChild(imgs[19]);
 //    setTimeout(function() {for (var i in contenderListAll) p1Pic.appendChild(imgs[i])}, 300);
     // for (var i = 0; i < contenderListAll.length; i++) {
     //   p1Pic.replaceChild(imgs[i], p1Pic.firstChild);
@@ -366,10 +379,11 @@ var p2 = document.getElementById('right-container');
 //+++++++++++++++++++++++++++++++++++++++++++++ EVENT LISTENERS
 
 goButton.addEventListener('click', function() {
+  removeWinner();
 	pickContenders();
 	placePics(p1Choice, p2Choice);
 	placeBonus(p1Choice, p2Choice);
-	removeWinner();
+
 });
   p1.addEventListener('click', function() {
     // audio.play();
