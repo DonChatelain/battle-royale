@@ -102,7 +102,11 @@ var murders = [
   "crucified",
   "disemboweled",
   "squashed",
-  "swatted"
+  "swatted",
+  "sat down for a nice tea with, and then killed",
+  "defenestrated",
+  "vaporized",
+  "enjoyed a soup composed primarily of"
 ];
 
 function getContenderLists() {
@@ -167,6 +171,12 @@ function tempPics() {
     var p2Pic = document.getElementById('right-pic');
     p1Pic.appendChild(imgs[14]);
     p2Pic.appendChild(imgs[15]);
+//    setTimeout(function() {for (var i in contenderListAll) p1Pic.appendChild(imgs[i])}, 300);
+    // for (var i = 0; i < contenderListAll.length; i++) {
+    //   p1Pic.replaceChild(imgs[i], p1Pic.firstChild);
+    //   setTimeout(function() {console.log('running loop');}, 100);
+
+    // } //Planned to slot machine pics before landing on one
 }
 function placePics(contA, contB) {
   	var p1Pic = document.getElementById('left-pic');
@@ -343,8 +353,8 @@ var contenderListAll = new Array(); //Array for all fighters
 var contenderList1 = new Array();  //Array for fighters on left side
 var contenderList2 = new Array();  //Array for fighters on right side
 var realMurder; //Declares global murder verb variable
-tempPics();  //Places grey questionmark Images as placeholder
 getContenderLists(); //pushes contender objects to respective arrays !important
+tempPics();  //Places grey questionmark Images as placeholder
 getAllBonus(); //pushes each contender's bonuses to their individual bonus arrays
 var p1Choice; //Global left side contender
 var p2Choice; //Global right side contender
